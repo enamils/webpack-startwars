@@ -1,0 +1,253 @@
+h1 {
+  color: $white;
+}
+
+header {
+  position: relative;
+
+  nav {
+    background-color: transparent;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+
+    @include mediaQuery(desktop) {
+      &.sticky {
+        z-index: 1000;
+        opacity: .5;
+        background-color: #181818;
+      }
+    }
+
+    .menu-button {
+      display: block;
+      cursor: pointer;
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+
+      @include mediaQuery(desktop) {
+        display: none;
+      }
+
+      .bar1,
+      .bar2,
+      .bar3 {
+        width: 35px;
+        height: 5px;
+        background-color: $white;
+        margin: 6px 0;
+        transition: 0.4s;
+        display: block;
+      }
+
+      &.expanded .bar1 {
+        -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+        transform: rotate(-45deg) translate(-9px, 6px);
+      }
+
+      &.expanded .bar2 {
+        opacity: 0;
+      }
+
+      &.expanded .bar3 {
+        -webkit-transform: rotate(45deg) translate(-8px, -8px);
+        transform: rotate(45deg) translate(-8px, -8px);
+      }
+    }
+  }
+
+  .parralax-section {
+    background: url('../images/header-bg.png') no-repeat center;
+    background-size: cover;
+    height: 500px;
+
+    .logo {
+      background: url('../images/logo.png') no-repeat top 6rem center;
+      height: 100%;
+    }
+  }
+
+  .nav-bar {
+    display: none;
+    flex-direction: column;
+    list-style: none;
+    padding: 0 1rem;
+    align-items: center;
+
+    &.expanded {
+      display: flex;
+      margin-top: 4rem;
+    }
+
+    @include mediaQuery(desktop) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: row;
+      height: 55px;
+    }
+
+    li {
+      display: inline-flex;
+      @include mediaQuery(tablet-end) {
+        margin: 1rem;
+      }
+
+      a {
+        color: $white;
+        text-decoration: none;
+        text-transform: uppercase;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+.container {
+  max-width: 1024px;
+  margin: auto;
+}
+
+.section-content {
+  background-color: $white;
+  padding: 3rem 2rem;
+
+  @include mediaQuery(desktop) {
+    padding: 3rem 1rem;
+  }
+
+  ul {
+    padding: 0;
+    list-style-type: '-';
+
+    li {
+      padding-left: .5rem;
+    }
+  }
+}
+
+.first-section {
+  @include mediaQuery(desktop) {
+    display: flex;
+
+    .text-intro {
+      flex: 2 1 0px;
+    }
+
+    .ads-content {
+      flex: 1 1 0px;
+      background: url('../images/ad.jpg') no-repeat;
+    }
+  }
+}
+
+.parralax-section-2 {
+  background: url('../images/kiloren.jpg') no-repeat center;
+  background-size: cover;
+  height: 500px;
+}
+
+.parralax-section-3 {
+  background: url('../images/stormtroopers.jpg') no-repeat center;
+  background-size: cover;
+  height: 250px;
+}
+
+footer {
+  background: url('../images/darthvader.jpg') no-repeat center;
+  background-color: #181818;
+  color: $grey;
+  padding: .1rem 0;
+  height: 271px;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @include mediaQuery(desktop) {
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: normal;
+    padding: 1rem;
+  }
+
+  .footer-links {
+    display: flex;
+    flex: 2 1 0px;
+
+    ul {
+      flex: 1 1 0px;
+      list-style: none;
+      padding: 0;
+
+      li {
+        padding-bottom: .5rem;
+
+        a {
+          color: $grey;
+        }
+      }
+    }
+  }
+
+  .footer-social-media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 0px;
+
+    @include mediaQuery(desktop) {
+      flex-direction: column;
+      justify-content: end;
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+
+    ul {
+      display: flex;
+      justify-content: space-between;
+      padding: 0;
+      list-style: none;
+
+      li {
+        display: block;
+        margin: 0 1rem;
+      }
+
+      span {
+        display: block;
+        height: 32px;
+        width: 32px;
+
+        &.facebook {
+          background: url('../images/icon_facebook.svg') no-repeat center;
+        }
+
+        &.instagram {
+          -webkit-mask: url('../images/icon_instagram.svg') no-repeat center;
+          mask: url('../images/icon_instagram.svg') no-repeat center;
+          background-color: $grey;
+        }
+
+        &.twitter {
+          background: url('../images/icon_twitter.svg') no-repeat center;
+        }
+      }
+    }
+  }
+}

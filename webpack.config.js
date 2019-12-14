@@ -1,11 +1,11 @@
 const webpack = require("webpack");
 const path = require("path");
-const MiniCssExtractplugin = require("mini-css-extract-plugin");
+const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
 const OptimizeCSSAssets = require("optimize-css-assets-webpack-plugin");
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 
 let config = {
-  entry: "./src/index.js",
+  entry: ["./src/index.js", "./assets/stylesheets/styles.scss"],
   output: {
     path: path.resolve(__dirname, "./public"),
     filename: "./bundle.js"
@@ -18,11 +18,32 @@ let config = {
     },
       {
         test: /\.scss$/,
-        use: ['css-hot-loader', MiniCssExtractplugin.loader, 'css-loader']
+        // use
+        use: ['css-hot-loader'].concat(ExtractTextWebpackPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'sass-loader', 'postcss-loader'],
+        }))
+      },
+      {
+        test: /\.(png|jpg|gif|svg)$/,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
+      {
+        test: /\.(html)$/,
+        use: {
+          loader: 'html-loader',
+          options: {
+            attrs: [':data-src']
+          }
+        }
       }]
   },
   plugins: [
-    new MiniCssExtractplugin("styles.css"),
+    new ExtractTextWebpackPlugin("styles.css"),
     new UglifyJSPlugin(),
   ],
   devServer: {
