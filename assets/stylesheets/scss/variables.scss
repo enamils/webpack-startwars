@@ -1,0 +1,12 @@
+// Responsive breakpoint
+$responsive: true;
+$mobile: 320px;
+$mobile-landscape: 480px;
+$tablet: 768px;
+$tablet-desktop: 992px;
+$desktop: 1024px;
+$desktop-wide: 1200px;
+// Responsive max breakpoint
+$mobile-end: $tablet - 1px;
+$tablet-end: $desktop - 1px;
+$desktop-end: $desktop-wide - 1px;
