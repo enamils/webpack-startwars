@@ -6,6 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Prisma Media - Test</title>
   <link href="styles.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/parallax.js/1.5.0/parallax.min.js"></script>
 </head>
 <body>
   <header>
@@ -24,8 +26,12 @@
         <li><a href="#">Jabba le hutt</a></li>
       </ul>
     </nav>
-    <div class="parralax-section">
-      <div class="logo"></div>
+    <div class="parallax-window-1">
+      <div class="parallax-slider">
+        <div class="parralax-section">
+          <div class="logo"></div>
+        </div>
+      </div>
     </div>
   </header>
   <section class="section-content">
@@ -51,23 +57,30 @@
         travers la galaxie. Au même moment, une jeune femme nommée Rey, pilleuse d'épaves sur la planète désertique Jakku, va
         faire la rencontre de Finn, un Stormtrooper en fuite, une rencontre qui bouleversera sa vie.</p>
       </div>
-      <aside class="ads-content">
+      <aside class="ads-content sticky">
+        <img class="sticky" src="../assets/images/ad.jpg" alt="" />
       </aside>
     </div>
   </section>
-  <section class="parralax-section-2"></section>
+  <div class="parallax-window-2">
+    <div class="parallax-slider">
+      <div class="bg-section-2"></div>
+    </div>
+  </div>
   <section class="section-content">
     <div class="container">
       <h2 class="txt-center">A long time ago, in a galaxy far, far away…</h2>
-      <p>
-        <img src="../assets/images/r2d2_c3p0.jpg" alt="r2d" />
-      <strong>La Guerre des étoiles</strong> (titre original <strong>Star Wars</strong>, soit littéralement Guerres Stellaires ) est une épopée
-      cinématographique de science-fiction créée par George Lucas, considérée comme un élément phare du space opera. Prévue à
-      la base pour être une suite de trois trilogies (triptyque), Lucas fut contraint, par manque de moyens techniques, de
-      commencer par la seconde trilogie (l'Épisode IV - Un nouvel espoir) en 1977. La série connut un succès phénoménal
-      partout dans le monde et engendra une très importante communauté de fans.
-      Sans prétendre expliquer le succès du premier film (s'il y avait une recette, cela se saurait), on peut, toutefois,
-      noter que, malgré le manque de moyens (le budget était relativement modeste, les acteurs presque inconnus) :</p>
+      <div class="content-text">
+        <img src="../assets/images/r2d2_c3p0.jpg" alt="r2d2" class="r2d2" />
+        <p>
+        <strong>La Guerre des étoiles</strong> (titre original <strong>Star Wars</strong>, soit littéralement Guerres Stellaires ) est une épopée
+        cinématographique de science-fiction créée par George Lucas, considérée comme un élément phare du space opera. Prévue à
+        la base pour être une suite de trois trilogies (triptyque), Lucas fut contraint, par manque de moyens techniques, de
+        commencer par la seconde trilogie (l'Épisode IV - Un nouvel espoir) en 1977. La série connut un succès phénoménal
+        partout dans le monde et engendra une très importante communauté de fans.
+        Sans prétendre expliquer le succès du premier film (s'il y avait une recette, cela se saurait), on peut, toutefois,
+        noter que, malgré le manque de moyens (le budget était relativement modeste, les acteurs presque inconnus) :</p>
+      </div>
       <ul>
         <li>Il fait appel à des références connues et appréciées des jeunes de l'époque : films de cape et d'épée, westerns,
         péplums, contes de fées et même le Seigneur des Anneaux de J.R.R. Tolkien ; cette œuvre n'apparaît pas comme de la
@@ -86,7 +99,7 @@
       </ul>
     </div>
   </section>
-  <section class="parralax-section-3"></section>
+  <section class="bg-section-3"></section>
   <footer>
     <div class="footer-content container">
       <p class="txt-center"><strong>TM Lucasfilm</strong> Ltd. All Rights Reserved.</p>
