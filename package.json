@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server -d --hot --config webpack.config.js --watch",
+    "start": "webpack-dev-server -d --hot --config webpack.config.js  --watch",
     "dev": "webpack",
     "prod": "cross-env NODE_ENV=production webpack --progress",
     "watch": "webpack --watch"
@@ -24,6 +24,9 @@
     "css-hot-loader": "^1.4.4",
     "css-loader": "^3.3.2",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "file-loader": "^5.0.2",
+    "html-loader": "^0.5.5",
+    "image-webpack-loader": "^6.0.0",
     "mini-css-extract-plugin": "^0.8.0",
     "node-sass": "^4.13.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
@@ -31,8 +34,13 @@
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.1",
     "uglifyjs-webpack-plugin": "^2.2.0",
+    "url-loader": "^3.0.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0"
+  },
+  "dependencies": {
+    "jquery-parallax.js": "^1.5.0",
+    "simple-parallax-js": "^5.2.0"
   }
 }
