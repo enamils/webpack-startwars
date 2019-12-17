@@ -14,6 +14,7 @@ body {
 .section-content {
   background-color: $white;
   padding: 3rem 2rem;
+  line-height: 1.8em;
 
   @include mediaQuery(desktop) {
     padding: 3rem 1rem;
@@ -22,12 +23,15 @@ body {
   .content-text {
     display: flex;
     flex-direction: column;
+    align-items: center;
 
      @include mediaQuery(desktop) {
        flex-direction: row;
+       align-items: normal;
 
        p {
          padding-left: 1rem;
+         margin-top: 0;
        }
      }
 
@@ -49,7 +53,7 @@ body {
 
   ul {
     padding: 0;
-    list-style-type: '-';
+    list-style: none;
 
     li {
       padding-left: .5rem;
@@ -58,27 +62,35 @@ body {
 }
 
 .first-section {
+
   @include mediaQuery(tablet-end) {
     text-align: center;
   }
 
   @include mediaQuery(desktop) {
     display: flex;
+    justify-content: space-between;
+  }
 
-    .text-intro {
+  h1 {
+    font-size: 1em;
+  }
+
+  .text-intro {
+    @include mediaQuery(desktop) {
       flex: 2 1 0px;
+      max-width: 40%;
     }
+  }
 
-    .ads-content {
-      flex: 1 1 0px;
+  .ads-content {
+    img.sticky {
+      max-width: 100%;
+      height: auto;
 
       @include mediaQuery(desktop) {
-        img.sticky {
-          position: sticky;
-          top: 0;
-          width: 200px;
-          margin-left: 4rem;
-        }
+        position: sticky;
+        top: 55px;
       }
     }
   }
