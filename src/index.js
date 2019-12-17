@@ -11,36 +11,33 @@ $('.parallax-window-2').parallax({
 });
 
 // STICKY MENU
-window.onscroll = function () { myFunction() };
+window.onscroll = () => { stickyMenu() };
 
-const header = document.getElementById("myHeader");
+const header = document.querySelector('.nav-header');
 const sticky = header.offsetTop;
 
-function myFunction() {
-  if (window.pageYOffset > sticky) {
-    header.classList.add("sticky");
-  } else {
-    header.classList.remove("sticky");
-  }
+stickyMenu = () => {
+  window.pageYOffset > sticky
+  ? header.classList.add("sticky")
+  : header.classList.remove("sticky")
 }
 
-// MENU burger for mobile
-
-(function () {
-
+// MENU RESPONSIVE
+menuResponsive = () => {
   const hamburger = {
-    navHeader: document.getElementById('myHeader'),
+    navHeader: document.querySelector('.nav-header'),
     navToggle: document.querySelector('.menu-button'),
     nav: document.querySelector('.nav-bar'),
 
-    doToggle: function (e) {
+    doToggle:  (e) => {
       e.preventDefault();
-      this.navHeader.classList.toggle('expanded');
-      this.navToggle.classList.toggle('expanded');
-      this.nav.classList.toggle('expanded');
+      hamburger.navHeader.classList.toggle('expanded');
+      hamburger.navToggle.classList.toggle('expanded');
+      hamburger.nav.classList.toggle('expanded');
     }
-  };
+  }
 
-  hamburger.navToggle.addEventListener('click', function (e) { hamburger.doToggle(e); });
+  hamburger.navToggle.addEventListener('click', (e) => { hamburger.doToggle(e) });
+}
 
-}());
+menuResponsive();
