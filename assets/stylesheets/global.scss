@@ -1,111 +1,9 @@
-h1 {
-  color: $white;
+body {
+  font-family: 'Open Sans', sans-serif;
 }
 
-header {
-  position: relative;
-
-  nav {
-    background-color: transparent;
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-
-    @include mediaQuery(tablet-end) {
-      height: 70px;
-      background-color: black;
-      opacity: .9;
-    }
-
-    &.expanded {
-      background-color: black;
-      opacity: .9;
-      height: 100vh;
-    }
-
-    @include mediaQuery(desktop) {
-      &.sticky {
-        z-index: 1000;
-        opacity: .5;
-        background-color: #181818;
-      }
-    }
-
-    .menu-button {
-      display: block;
-      cursor: pointer;
-      position: absolute;
-      right: 1rem;
-      top: 1rem;
-
-      @include mediaQuery(desktop) {
-        display: none;
-      }
-
-      .bar1,
-      .bar2,
-      .bar3 {
-        width: 35px;
-        height: 5px;
-        background-color: $white;
-        margin: 6px 0;
-        transition: 0.4s;
-        display: block;
-      }
-
-      &.expanded .bar1 {
-        -webkit-transform: rotate(-45deg) translate(-9px, 6px);
-        transform: rotate(-45deg) translate(-9px, 6px);
-      }
-
-      &.expanded .bar2 {
-        opacity: 0;
-      }
-
-      &.expanded .bar3 {
-        -webkit-transform: rotate(45deg) translate(-8px, -8px);
-        transform: rotate(45deg) translate(-8px, -8px);
-      }
-    }
-  }
-
-  .nav-bar {
-    display: none;
-    flex-direction: column;
-    list-style: none;
-    padding: 0 1rem;
-    align-items: center;
-
-    &.expanded {
-      display: flex;
-      margin-top: 4rem;
-    }
-
-    @include mediaQuery(desktop) {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-direction: row;
-      height: 55px;
-    }
-
-    li {
-      display: inline-flex;
-      @include mediaQuery(tablet-end) {
-        margin: 1rem;
-      }
-
-      a {
-        color: $white;
-        text-decoration: none;
-        text-transform: uppercase;
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
-  }
+.txt-center {
+  text-align: center;
 }
 
 .container {
@@ -222,7 +120,7 @@ header {
 
 footer {
   background: url('../images/darthvader.jpg') no-repeat center;
-  background-color: #181818;
+  background-color: $black;
   color: $grey;
   padding: .1rem 0;
   height: 271px;
@@ -233,6 +131,7 @@ footer {
   flex-direction: column;
   justify-content: center;
   height: 100%;
+  font-size: .9em;
 }
 
 .footer-bottom {
@@ -243,7 +142,6 @@ footer {
   @include mediaQuery(desktop) {
     justify-content: space-between;
     flex-direction: row;
-    align-items: normal;
     padding: 1rem;
   }
 
@@ -251,10 +149,18 @@ footer {
     display: flex;
     flex: 2 1 0px;
 
+    @include mediaQuery(tablet-end) {
+      justify-content: space-around;
+      width: 100%;
+    }
+
     ul {
-      flex: 1 1 0px;
       list-style: none;
       padding: 0;
+
+      @include mediaQuery(desktop) {
+        flex: 1 1 0px;
+      }
 
       li {
         padding-bottom: .5rem;
@@ -268,47 +174,51 @@ footer {
 
   .footer-social-media {
     display: flex;
-    justify-content: center;
     align-items: center;
     flex: 1 1 0px;
+    justify-content: flex-end;
 
-    @include mediaQuery(desktop) {
-      flex-direction: column;
-      justify-content: end;
-    }
-
-    p {
-      margin-bottom: 0;
-    }
-
-    ul {
+    .footer-social-flex {
       display: flex;
-      justify-content: space-between;
-      padding: 0;
-      list-style: none;
+      align-items: center;
 
-      li {
-        display: block;
-        margin: 0 1rem;
+      @include mediaQuery(desktop) {
+        flex-direction: column;
       }
 
-      span {
-        display: block;
-        height: 32px;
-        width: 32px;
+      p {
+        margin: 0;
+      }
 
-        &.facebook {
-          background: url('../images/icon_facebook.svg') no-repeat center;
+      ul {
+        display: flex;
+        justify-content: space-between;
+        padding: 0;
+        list-style: none;
+
+        li {
+          display: block;
+          margin: 0 .5rem;
         }
 
-        &.instagram {
-          -webkit-mask: url('../images/icon_instagram.svg') no-repeat center;
-          mask: url('../images/icon_instagram.svg') no-repeat center;
-          background-color: $grey;
-        }
+        span {
+          display: block;
+          height: 32px;
+          width: 32px;
 
-        &.twitter {
-          background: url('../images/icon_twitter.svg') no-repeat center;
+          &.facebook {
+            background: url('../images/icon_facebook.svg') no-repeat center;
+          }
+
+          &.instagram {
+            -webkit-mask: url('../images/icon_instagram.svg') no-repeat center;
+            mask: url('../images/icon_instagram.svg') no-repeat center;
+            background-color: $grey;
+          }
+
+          &.twitter {
+            background: url('../images/icon_twitter.svg') no-repeat center;
+          }
         }
       }
     }
