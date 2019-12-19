@@ -17,7 +17,7 @@ body {
   line-height: 1.8em;
 
   @include mediaQuery(desktop) {
-    padding: 3rem 1rem;
+    padding: 5rem 1rem;
   }
 
   .content-text {
@@ -122,12 +122,6 @@ body {
   background: url('../images/stormtroopers.jpg') no-repeat center;
   background-size: cover;
   height: 250px;
-}
-
-.parallax-window-1,
-.parallax-window-2 {
-  min-height: 500px;
-  background: transparent;
 }
 
 footer {
