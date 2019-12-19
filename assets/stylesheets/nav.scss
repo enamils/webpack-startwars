@@ -7,6 +7,7 @@ header {
     top: 0;
     right: 0;
     left: 0;
+    z-index: 2000;
 
     @include mediaQuery(tablet-end) {
       height: 70px;
@@ -16,12 +17,10 @@ header {
     &.expanded {
       background-color: rgba(24, 24, 24, 0.9) !important;
       height: 100vh;
-      z-index: 1000;
     }
 
     @include mediaQuery(desktop) {
       &.sticky {
-        z-index: 1000;
         background-color: rgba(24, 24, 24, 0.9) !important;
       }
     }
@@ -93,6 +92,7 @@ header {
 
       a {
         color: $white;
+        font-weight: bold;
         text-decoration: none;
         text-transform: uppercase;
 
