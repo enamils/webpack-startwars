@@ -25,15 +25,15 @@ body {
     flex-direction: column;
     align-items: center;
 
-     @include mediaQuery(desktop) {
-       flex-direction: row;
-       align-items: normal;
+    @include mediaQuery(desktop) {
+      flex-direction: row;
+      align-items: normal;
 
-       p {
-         padding-left: 1rem;
-         margin-top: 0;
-       }
-     }
+      p {
+        padding-left: 1rem;
+        margin-top: 0;
+      }
+    }
 
     .r2d2 {
       max-width: 100%;

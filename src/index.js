@@ -11,15 +11,17 @@ bgParallax.refresh();
 rellaxentered.refresh();
 
 // STICKY MENU
-window.onscroll = () => { stickyMenu() };
+window.onscroll = () => {
+  const header = document.querySelector('.nav-header');
+  const sticky = header.offsetTop;
 
-const header = document.querySelector('.nav-header');
-const sticky = header.offsetTop;
+  const stickyMenu = () => {
+    window.pageYOffset > sticky
+      ? header.classList.add("sticky")
+      : header.classList.remove("sticky")
+  }
 
-const stickyMenu = () => {
-  window.pageYOffset > sticky
-  ? header.classList.add("sticky")
-  : header.classList.remove("sticky")
+  return stickyMenu()
 }
 
 // MENU RESPONSIVE
