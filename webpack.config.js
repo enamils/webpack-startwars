@@ -3,6 +3,7 @@ const path = require("path");
 const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
 const OptimizeCSSAssets = require("optimize-css-assets-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const WebpackBar = require('webpackbar');
 
 let config = {
   entry: ["./src/index.js", "./assets/stylesheets/styles.scss"],
@@ -41,6 +42,7 @@ let config = {
   plugins: [
     new ExtractTextWebpackPlugin("styles.css"),
     new UglifyJsPlugin(),
+    new WebpackBar()
   ],
   devServer: {
     contentBase: path.resolve(__dirname, "./public"),
