@@ -35,15 +35,6 @@ let config = {
       test: /\.(png|jpg|gif|svg)$/,
       use: 'file-loader?name=[name].[ext]&outputPath=images/',
     },
-    {
-      test: /\.(html)$/,
-      use: {
-        loader: 'html-loader',
-        options: {
-          attrs: [':data-src']
-        }
-      }
-    }
   ]
   },
   plugins: [
