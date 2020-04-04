@@ -1,15 +1,22 @@
 const webpack = require("webpack");
 const path = require("path");
+const glob = require("glob");
+
 const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
 const OptimizeCSSAssets = require("optimize-css-assets-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const WebpackBar = require('webpackbar');
 
 let config = {
-  entry: ["./src/index.js", "./assets/stylesheets/styles.scss"],
+  devtool: "eval-source-map",
+  entry: {
+    app: "./src/assets/javascript/index.js",
+    css: "./src/assets/stylesheets/styles.scss",
+    img: glob.sync("./src/assets/images/*"),
+  },
   output: {
-    path: path.resolve(__dirname, "./public"),
-    filename: "./bundle.js"
+    path: path.resolve(__dirname, "./public/dist"),
+    filename: "./[name].js"
   },
   module: {
     rules: [{
@@ -51,7 +58,6 @@ let config = {
     open: true,
     hot: true
   },
-  devtool: "eval-source-map"
 }
 
 module.exports = config;
