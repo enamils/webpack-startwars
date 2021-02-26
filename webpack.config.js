@@ -2,16 +2,18 @@ const webpack = require("webpack");
 const path = require("path");
 const glob = require("glob");
 
-const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
-const OptimizeCSSAssets = require("optimize-css-assets-webpack-plugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackBar = require('webpackbar');
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 
-let config = {
+const smp = new SpeedMeasurePlugin();
+const devMode = process.env.NODE_ENV !== 'production';
+
+const allConfig = smp.wrap({
   devtool: "eval-source-map",
   entry: {
     app: "./src/assets/javascript/index.js",
-    css: "./src/assets/stylesheets/styles.scss",
+    styles: "./src/assets/stylesheets/styles.scss",
     img: glob.sync("./src/assets/images/*"),
   },
   output: {
@@ -25,11 +27,11 @@ let config = {
       loader: "babel-loader"
     },
     {
-      test: /\.scss$/,
-      use: ['css-hot-loader'].concat(ExtractTextWebpackPlugin.extract({
-        fallback: 'style-loader',
-        use: ['css-loader', 'sass-loader', 'postcss-loader'],
-      }))
+      test: /\.(sa|sc|c)ss$/,
+      use: [
+        MiniCssExtractPlugin.loader,
+        'css-loader', 'postcss-loader', 'sass-loader'
+      ]
     },
     {
       test: /\.(png|jpg|gif|svg)$/,
@@ -38,9 +40,13 @@ let config = {
   ]
   },
   plugins: [
-    new ExtractTextWebpackPlugin("styles.css"),
-    new UglifyJsPlugin(),
-    new WebpackBar()
+    new WebpackBar({
+      name: "Build All Files",
+      color: "pink"
+    }),
+    new MiniCssExtractPlugin({
+      filename: './[name].css',
+    }),
   ],
   devServer: {
     contentBase: path.resolve(__dirname, "./public"),
@@ -49,13 +55,6 @@ let config = {
     open: true,
     hot: true
   },
-}
+});
 
-module.exports = config;
-
-if (process.env.NODE_ENV === 'production') {
-  module.exports.plugins.push(
-    new webpack.optimize.UglifyJsPlugin(),
-    new OptimizeCSSAssets()
-  );
-}
+module.exports = allConfig;
