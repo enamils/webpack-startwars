@@ -10,15 +10,16 @@ const smp = new SpeedMeasurePlugin();
 const devMode = process.env.NODE_ENV !== 'production';
 
 const allConfig = smp.wrap({
-  devtool: "eval-source-map",
+  devtool: devMode ? "eval-source-map" : false,
   entry: {
-    app: "./src/assets/javascript/index.js",
+    app: "./src/assets/javascript/app.js",
     styles: "./src/assets/stylesheets/styles.scss",
     img: glob.sync("./src/assets/images/*"),
   },
   output: {
     path: path.resolve(__dirname, "./public/dist"),
-    filename: "./[name].js"
+    filename: "./[name].js",
+    publicPath: "/dist/"
   },
   module: {
     rules: [{
@@ -51,10 +52,13 @@ const allConfig = smp.wrap({
   devServer: {
     contentBase: path.resolve(__dirname, "./public"),
     historyApiFallback: true,
-    inline: true,
-    open: true,
-    hot: true
+    compress: true,
+    disableHostCheck: true
   },
 });
+
+if(devMode) {
+  allConfig.plugins.push(new webpack.HotModuleReplacementPlugin())
+}
 
 module.exports = allConfig;
