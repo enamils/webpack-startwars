@@ -1,0 +1,16 @@
+  <% const navItem = ["Le coté lumineux", "Le coté obscur", "L’empire", "Les droïdes", "Les ewoks", "Jabba le hutt"]; %>
+  <nav class="nav-header">
+    <button class="menu-button" aria-label="menu-button">
+      <% for(let i = 1; i < 4; i++) { %>
+      <span class="bar<%= [i] %>"></span>
+      <% } %>
+    </button>
+    <ul class="nav-bar container">
+      <% navItem.forEach(item => { %>
+        <li><a href="#"><%= item %></a></li>
+      <% }); %>
+    </ul>
+  </nav>
+  <div class="parralax-section rellax" data-rellax-speed="-2">
+    <div class="logo rellax" data-rellax-speed="8"></div>
+  </div>
