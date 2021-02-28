@@ -5,6 +5,7 @@ const glob = require("glob");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackBar = require('webpackbar');
 const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const smp = new SpeedMeasurePlugin();
 const devMode = process.env.NODE_ENV !== 'production';
@@ -18,7 +19,7 @@ const allConfig = smp.wrap({
   },
   output: {
     path: path.resolve(__dirname, "./public/dist"),
-    filename: "./[name].js",
+    filename: "bundle.js",
     publicPath: "/dist/"
   },
   module: {
@@ -26,6 +27,13 @@ const allConfig = smp.wrap({
       test: /\.js$/,
       exclude: /node_modules/,
       loader: "babel-loader"
+    },
+    {
+      test: /\.ejs$/,
+      loader: 'ejs-loader',
+      options: {
+        esModule: false
+      }
     },
     {
       test: /\.(sa|sc|c)ss$/,
@@ -43,14 +51,19 @@ const allConfig = smp.wrap({
   plugins: [
     new WebpackBar({
       name: "Build All Files",
-      color: "pink"
+      color: "aqua"
     }),
     new MiniCssExtractPlugin({
-      filename: './[name].css',
+      filename: '[name].css',
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'index.ejs'
     }),
   ],
   devServer: {
-    contentBase: path.resolve(__dirname, "./public"),
+    contentBase: path.resolve(__dirname, "./public/dist"),
+    watchContentBase: true,
     historyApiFallback: true,
     compress: true,
     disableHostCheck: true
