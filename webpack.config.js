@@ -1,29 +1,58 @@
 const webpack = require("webpack");
 const path = require("path");
 const glob = require("glob");
+const fglob = require("fast-glob");
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackBar = require('webpackbar');
-const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+//const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
 
-const smp = new SpeedMeasurePlugin();
+//const smp = new SpeedMeasurePlugin();
 const devMode = process.env.NODE_ENV !== 'production';
 
-const allConfig = smp.wrap({
+const allConfig = {
   devtool: devMode ? "eval-source-map" : false,
   entry: {
-    app: "./src/assets/javascript/app.js",
+    library: "./src/assets/javascript/app.js",
     styles: "./src/assets/stylesheets/styles.scss",
-    img: glob.sync("./src/assets/images/*"),
+    img: fglob.sync("./src/assets/images/*"),
   },
   output: {
-    path: path.resolve(__dirname, "./public/dist"),
-    filename: "bundle.js",
-    publicPath: "/dist/"
+    path: path.resolve(__dirname, "./public/"),
+    filename: "js/[name].js",
   },
+  devServer: {
+    static: {
+      directory: path.resolve(__dirname, "./public/"),
+      staticOptions: {},
+      serveIndex: true,
+      watch: true,
+    },
+    client: {
+      logging: 'info',
+      overlay: true,
+    },
+    allowedHosts: "all"
+  },
+  plugins: [
+    new WebpackBar({
+      name: "Build All Files",
+      color: "blue"
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css',
+      chunkFilename: 'css/[id].css',
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'index.ejs'
+    }),
+  ],
   module: {
-    rules: [{
+    rules: [
+    {
       test: /\.js$/,
       exclude: /node_modules/,
       loader: "babel-loader"
@@ -44,61 +73,63 @@ const allConfig = smp.wrap({
     },
     {
       test: /\.(png|jpg|gif|svg)$/,
-      // use: 'file-loader?name=[name].[ext]&outputPath=images/',
-      use: [
-        {
-          loader: 'file-loader',
+      type: "asset/resource",
+      generator: {
+        filename: 'images/[name][ext]'
+      }
+    },
+  ]
+  },
+  optimization: {
+    minimizer: [
+      "...",
+      new ImageMinimizerPlugin({
+        minimizer: {
+          implementation: ImageMinimizerPlugin.imageminMinify,
           options: {
-            name: '[name].[ext]',
-            outputPath: 'images/'
-          }
-        },
-        {
-          loader: 'image-webpack-loader',
-          options: {
-            mozjpeg: {
-              progressive: true,
+            // Lossless optimization with custom option
+            // Feel free to experiment with options for better result for you
+            plugins: [
+              ["gifsicle", { interlaced: true }],
+              ["jpegtran", { progressive: true }],
+              ["optipng", { optimizationLevel: 5 }],
+              // Svgo configuration here https://github.com/svg/svgo#configuration
+              [
+                "svgo",
+                {
+                  plugins: [
+                    {
+                      name: "preset-default",
+                      params: {
+                        overrides: {
+                          removeViewBox: false,
+                          addAttributesToSVGElement: {
+                            params: {
+                              attributes: [
+                                { xmlns: "http://www.w3.org/2000/svg" },
+                              ],
+                            },
             },
-            optipng: {
-              enabled: false,
             },
             pngquant: {
               quality: [0.65, 0.90],
               speed: 4
-            },
-            gifsicle: {
-              interlaced: false,
-            }
-          }
+                          },
+            pngquant: {
+              quality: [0.65, 0.90],
+              speed: 4
+                        },
+                      },
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
         },
-      ],
-    },
-  ]
-  },
-  plugins: [
-    new WebpackBar({
-      name: "Build All Files",
-      color: "aqua"
-    }),
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-    }),
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'index.ejs'
-    }),
-  ],
-  devServer: {
-    contentBase: path.resolve(__dirname, "./public/dist"),
-    watchContentBase: true,
-    historyApiFallback: true,
-    compress: true,
-    disableHostCheck: true
-  },
-});
-
-if(devMode) {
-  allConfig.plugins.push(new webpack.HotModuleReplacementPlugin())
-}
+      }),
+    ],
+  }
+};
 
 module.exports = allConfig;
